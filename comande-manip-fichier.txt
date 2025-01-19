@@ -1,0 +1,43 @@
+On va creer les deux dossier  c:\OddFolder et c:\EvenFolder:
+
+New-Item -Path OddFolder -ItemType Directory
+New-Item -Path EvenFolder -ItemType Directory
+
+For ($i = 1; $i -le 10; $i++){
+	$pathFicher1 = "C:\FolderTest1\File$i"
+	$pathFicher2 = "C:\FolderTest2\File$i"
+	
+	
+	#Test-Path condition qui vérifie si un fichier ou un dossier existe à l'emplacement spécifié.
+	if(Test-Path $pathFicher1){	
+		if ($i % 2 -eq 0)
+		{
+			# Déplacer les fichiers pairs dans EvenFolder
+			Move-Item -Path $pathFicher1 -Destination C:\EvenFolder
+		}
+		else
+		{
+		   # Déplacer les fichiers impairs dans OddFolder
+		   Move-Item -Path $pathFicher1 -Destination C:\OddFolder
+		}
+	}
+	
+	if(Test-Path $pathFicher2){
+		if($i % 2 -eq 0)
+		{
+			# Déplacer les fichiers pairs dans EvenFolder
+			Move-Item -Path $pathFicher2 -Destination C:\EvenFolder
+		}
+		else
+		{
+		   # Déplacer les fichiers impairs dans OddFolder
+		   Move-Item -Path $pathFicher2 -Destination C:\OddFolder
+		}
+	}
+ }
+ 
+ #Récupère l'historique des commandes que tu as tapées 
+ Get-History > historique.txt
+ 
+ #Récupère le contenu des dossiers 
+ Get-ChildItem -Path *Folder* -Recurse > listing.txt
